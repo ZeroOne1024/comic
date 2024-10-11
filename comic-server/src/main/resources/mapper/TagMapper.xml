@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sumika.mapper.TagMapper">
+
+    <select id="selectListByIds" resultType="com.sumika.dto.TagComicDTO">
+        select comic_id, tag.id as id, name from comic_tag left join tag on comic_tag.tag_id = tag.id
+            where comic_id in
+        <foreach collection="idlist" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectByComicId" resultType="com.sumika.entity.Tag">
+        select tag.id,name from tag left join comic_tag on tag.id = comic_tag.tag_id
+        where comic_id = #{id}
+    </select>
+</mapper>

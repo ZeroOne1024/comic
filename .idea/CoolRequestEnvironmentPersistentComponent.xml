@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CoolRequestEnvironmentPersistentComponent">
+    <option name="environments" value="[{&quot;environmentName&quot;:&quot;token&quot;,&quot;hostAddress&quot;:&quot;http://127.0.0.1:8080&quot;,&quot;id&quot;:&quot;c708572f-0312-4956-87f5-cfbe977dc7a3&quot;,&quot;header&quot;:[{&quot;key&quot;:&quot;Token&quot;,&quot;value&quot;:&quot;eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjo5OTksImV4cCI6MTcxOTY5MTk5MCwidXNlcklkIjoxfQ.Ie3JAhlVUV4dMK8oMqNXLWeVNo-rVVQ4G3cyVZ_TRR8&quot;,&quot;valueType&quot;:&quot;string&quot;,&quot;describe&quot;:&quot;&quot;}],&quot;urlParam&quot;:[],&quot;formData&quot;:[],&quot;formUrlencoded&quot;:[]}]" />
+    <selectId>c708572f-0312-4956-87f5-cfbe977dc7a3</selectId>
+  </component>
+</project>

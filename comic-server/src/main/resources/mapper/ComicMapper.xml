@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sumika.mapper.ComicMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert
+            comic
+            (image, name, author, state, serial_state, `describe`, score, release_date, create_time, update_time)
+        VALUES
+            (#{image},#{name},#{author},#{state},#{serialState},#{describe},#{score},#{releaseDate},#{createTime},#{updateTime})
+    </insert>
+
+    <update id="update">
+        update comic
+        <set>
+            <if test="image != null and image != ''">
+                ,image = #{image}
+            </if>
+            <if test="name != null and name != ''">
+                ,name = #{name}
+            </if>
+            <if test="author != null and author != ''">
+                ,author = #{author}
+            </if>
+            <if test="state != null">
+                ,state = #{state}
+            </if>
+            <if test="serialState != null">
+                ,serial_state = #{serialState}
+            </if>
+            <if test="describe != null and describe != ''">
+                ,`describe` = #{describe}
+            </if>
+            <if test="score != null">
+                ,score = #{score}
+            </if>
+            <if test="releaseDate != null">
+                ,release_date = #{releaseDate}
+            </if>
+            <if test="updateTime != null">
+                ,update_time = #{updateTime}
+            </if>
+
+        </set>
+        where
+            id = #{id}
+    </update>
+
+
+    <select id="searchList" resultType="com.sumika.entity.Comic">
+        select * from comic
+        <where>
+            <if test="tagId != null and tagId != 0">
+                and id in (select comic_id from comic_tag where tag_id = #{tagId})
+            </if>
+
+            <if test="name != null and name !=''">
+                and name like #{name}
+            </if>
+            <if test="author != null and author !=''">
+                and author = #{author}
+            </if>
+            <if test="serialState != null and serialState != '-1'">
+                and serial_state = #{serialState}
+            </if>
+            <if test="releaseDateStart != null">
+                and release_date &gt; #{serialState}
+            </if>
+            <if test="releaseDateEnd != null">
+                and release_date &lt; #{serialState}
+            </if>
+        </where>
+        order by
+            <if test="sort == null">
+                update_time
+        desc
+            </if>
+            <if test="sort == 0">
+                update_time
+            </if>
+            <if test="sort == 1">
+                update_time
+            </if>
+            <if test="sort == 2">
+                release_date
+            </if>
+            <if test="sort == 3">
+                score
+        desc
+            </if>
+
+    </select>
+</mapper>

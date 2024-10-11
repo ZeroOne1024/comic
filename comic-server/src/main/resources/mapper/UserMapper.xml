@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sumika.mapper.UserMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert user
+            (name, image, account, password,status,type, create_time, update_time)
+        value
+            (#{name},#{image},#{account},#{password},#{status},#{type},#{createTime},#{updateTime})
+    </insert>
+
+    <update id="updateById">
+        update user
+        <set>
+            <if test="name != null and name != ''">
+                ,name = #{name}
+            </if>
+            <if test="image != null and image != ''">
+                ,image = #{image}
+            </if>
+            <if test="password != null and password != ''">
+                ,password = #{password}
+            </if>
+            <if test="type != null">
+                ,type = #{type}
+            </if>
+            <if test="status != null">
+                ,status = #{status}
+            </if>
+            <if test="updateTime != null">
+                ,update_time = #{updateTime}
+            </if>
+        </set>
+        where
+            id = #{id}
+    </update>
+
+    <select id="select" resultType="com.sumika.entity.User">
+        select
+            id, name, image, account, password,status,type, create_time, update_time
+
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like #{name}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+        </where>
+        from user
+        order by update_time
+    </select>
+
+    <select id="getDataById" resultType="com.sumika.vo.UserVO">
+        select
+            u.id, u.name, u.image, u.account, u.type, u.status, u.create_time,u.update_time,
+            du.phone, du.email, du.money
+
+            from user as u left join detailed_user as du on u.id = du.user_id
+        where u.id = #{id}
+    </select>
+
+
+</mapper>

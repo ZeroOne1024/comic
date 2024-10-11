@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sumika.mapper.CartMapper">
+
+    <insert id="insert">
+        insert cart (comic_id, comic_volume_id, user_id, money, image, serial_number)
+        VALUES
+             <foreach collection="cartList" item="cart" separator=",">
+                 (#{cart.comicId},#{cart.comicVolumeId},#{cart.userId},#{cart.money},#{cart.image},#{cart.serialNumber})
+             </foreach>
+    </insert>
+    <select id="selectAllList" resultType="com.sumika.entity.Cart">
+        select
+            cart.id, cart.comic_id, cart.comic_volume_id, cart.user_id, cart.money, cart.image, cart.serial_number,
+            comic.name as comicName
+        from
+           cart left join comic
+       on
+           cart.comic_id = comic.id
+    </select>
+
+</mapper>
